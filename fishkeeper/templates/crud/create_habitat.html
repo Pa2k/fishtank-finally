@@ -1,0 +1,12 @@
+{% extends 'crud/base.html' %}
+
+{% block main %}
+<h1>create</h1>
+<form method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <h3>Habitat form</h3>
+    {{ habitat_form.as_p }}
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

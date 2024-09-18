@@ -1,0 +1,27 @@
+{% extends 'crud/base.html' %}
+
+{% block main %}
+<h1>รายการปลา</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ชื่อปลา</th>
+            <th>สายพันธุ์</th>
+            <th>ขนาด</th>
+            <th>ดูรายละเอียด</th>
+            <th>ตัวเลือก</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fish in fishes %}
+        <tr>
+            <td>{{ fish.fish_name }}</td>
+            <td>{{ fish.species }}</td>
+            <td>{{ fish.size }} กิโลกรัม</td>
+            <td><a href="{% url 'fish_detail' fish.id %}">ดูรายละเอียด</a></td>
+            <td><a href="{% url 'delete_fish' fish.id %}">delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

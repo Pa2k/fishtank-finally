@@ -1,0 +1,11 @@
+{% extends 'crud/base.html' %}
+
+{% block main %}
+<h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete {{ fish.fish_name }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'panel' %}">Cancel</a>
+    </form>
+{% endblock %}
