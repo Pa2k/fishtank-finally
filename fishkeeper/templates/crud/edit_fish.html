@@ -1,0 +1,23 @@
+{% extends 'mains/base.html' %}
+
+{% block main %}
+<h1>แก้ไขข้อมูลปลา</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ fish_form.as_p }}
+
+    <h3>อาหาร</h3>
+    {{ food_formset.management_form }}
+    {% for form in food_formset %}
+        {{ form.as_p }}
+    {% endfor %}
+
+    <h3>ที่อยู่</h3>
+    {{ habitat_formset.management_form }}
+    {% for form in habitat_formset %}
+        {{ form.as_p }}
+    {% endfor %}
+
+    <button type="submit">บันทึก</button>
+</form>
+{% endblock %}

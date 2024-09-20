@@ -1,58 +1,71 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from myapp.models import * 
 from .forms import *
+from django.forms import inlineformset_factory
 # Create your views here.
 def panel(request):
-    return render(request,"crud/base.html")
+    return render(request,"mains/base.html")
+
+# สร้าง formsets สำหรับ Food และ Habitat
+FoodFormSet = inlineformset_factory(Fish, Food, form=FoodForm, extra=1)
+HabitatFormSet = inlineformset_factory(Fish, Habitat, form=HabitatForm, extra=1)
 
 def create_fish(request):
     if request.method == 'POST':
         fish_form = FishForm(request.POST, request.FILES)
-        if fish_form.is_valid():
-            fish = fish_form.save()
-            request.session['fish_id'] = fish.id
-            return redirect("create_food")
+        food_formset = FoodFormSet(request.POST, instance=None)  # instance=None เนื่องจากยังไม่มี Fish ที่จะเชื่อม
+        habitat_formset = HabitatFormSet(request.POST, instance=None)
+
+        if fish_form.is_valid() and food_formset.is_valid() and habitat_formset.is_valid():
+            fish = fish_form.save()  # บันทึกข้อมูลปลา
+            food_formset.instance = fish  # เชื่อมโยง food กับ fish
+            food_formset.save()  # บันทึกข้อมูลอาหาร
+            habitat_formset.instance = fish  # เชื่อมโยง habitat กับ fish
+            habitat_formset.save()  # บันทึกข้อมูลที่อยู่
+            return redirect('panel')  # กลับไปหน้า panel หลังบันทึกสำเร็จ
     else:
         fish_form = FishForm()
-    return render(request, "crud/create_fish.html", {'fish_form': fish_form})
+        food_formset = FoodFormSet(instance=None)  # ไม่ต้องใส่ instance ตอนแรก
+        habitat_formset = HabitatFormSet(instance=None)
 
-def create_food(request):
-    fish_id = request.session.get('fish_id')
-    if not fish_id:
-        return redirect('create_fish')
+    return render(request, "crud/create_fish.html", {
+        'fish_form': fish_form,
+        'food_formset': food_formset,
+        'habitat_formset': habitat_formset,
+    })
+
+def edit_fish(request, fish_id):
+    # ดึงข้อมูลปลา (Fish) ที่ต้องการแก้ไข ถ้าไม่มีจะได้ 404
+    fish = get_object_or_404(Fish, id=fish_id)
+
+    # สร้าง form สำหรับ Fish, Food, Habitat โดยใช้ instance ของปลา (Fish)
     if request.method == 'POST':
-        food_form = FoodForm(request.POST)
-        if food_form.is_valid():
-            food = food_form.save(commit=False)
-            food.fish_id = fish_id
-            food.save()
-            return redirect("create_habitat")
-    else:
-        food_form = FoodForm()
-    return render(request, "crud/create_food.html", {'food_form': food_form})
+        fish_form = FishForm(request.POST, request.FILES, instance=fish)
+        food_formset = FoodFormSet(request.POST, instance=fish)
+        habitat_formset = HabitatFormSet(request.POST, instance=fish)
 
-def create_habitat(request):
-    fish_id = request.session.get('fish_id')  # ดึง fish_id จาก session
+        # ตรวจสอบว่าแต่ละฟอร์มถูกต้องหรือไม่
+        if fish_form.is_valid() and food_formset.is_valid() and habitat_formset.is_valid():
+            # บันทึกการแก้ไข
+            fish = fish_form.save()
+            food_formset.instance = fish  # เชื่อมโยง food กับปลา
+            food_formset.save()
+            habitat_formset.instance = fish  # เชื่อมโยง habitat กับปลา
+            habitat_formset.save()
 
-    if not fish_id:
-        return redirect('create_fish')
-    
-    try:
-        fish = Fish.objects.get(id=fish_id)
-    except Fish.DoesNotExist:
-        return redirect('create_fish')
-    
-    if request.method == 'POST':
-        habitat_form = HabitatForm(request.POST)
-        if habitat_form.is_valid():
-            habitat = habitat_form.save(commit=False) # อย่าเพิ่งบันทึกในฐานข้อมูล
-            habitat.fish = fish  # ใช้ object ของ fish แทนการตั้งค่า id โดยตรง
-            habitat.save()
-            del request.session['fish_id']  # ลบ fish_id ออกจาก session
-            return redirect("panel")
+            return redirect('fish_list')
     else:
-        habitat_form = HabitatForm()
-    return render(request, "crud/create_habitat.html", {'habitat_form': habitat_form})
+        # GET: แสดงข้อมูลในฟอร์มเพื่อแก้ไข
+        fish_form = FishForm(instance=fish)
+        food_formset = FoodFormSet(instance=fish)
+        habitat_formset = HabitatFormSet(instance=fish)
+
+    # ส่ง form และ formset ไปยัง template
+    return render(request, 'crud/edit_fish.html', {
+        'fish_form': fish_form,
+        'food_formset': food_formset,
+        'habitat_formset': habitat_formset,
+    })
 
 def fish_list(request):
     fishes = Fish.objects.all()
