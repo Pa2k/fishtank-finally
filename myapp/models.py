@@ -14,7 +14,7 @@ class Fish(models.Model):
     birth_date = models.DateField(verbose_name='วันเกิด')
     description = models.TextField(verbose_name='รายละเอียด')
     size = models.FloatField(verbose_name='ขนาด')
-    image = models.ImageField(upload_to='media/fishimage',verbose_name='รูปปลา')
+    image = models.ImageField(upload_to='fishimage',verbose_name='รูปปลา')
 
     def __str__(self) :
         return self.fish_name

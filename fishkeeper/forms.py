@@ -4,14 +4,14 @@ from myapp.models import *
 class FishForm(forms.ModelForm):
     class Meta:
         model = Fish
-        fields = "__all__"
+        fields = '__all__'
 
 class FoodForm(forms.ModelForm):
     class Meta:
         model = Food
-        fields = "__all__"
+        fields = ['food_type', 'food_name', 'feeding_frequency', 'food_source']
 
 class HabitatForm(forms.ModelForm):
     class Meta:
         model = Habitat
-        fields = "__all__"
+        fields = ['habitat_name','temperature','ph_level','migration']

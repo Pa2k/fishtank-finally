@@ -1,12 +1,12 @@
 <div>
     <header class=" bg-base-200 shadow px-4">
         <div class="mx-auto flex max-w-screen-lg items-center justify-between py-4">
-        <a href="#" class="text-2xl flex items-center font-black">
+        <a href="{% url 'fish_card' %}" class="text-2xl flex items-center font-black">
             <span>FishTank</span>
         </a>
         <nav>
             <ul class="flex gap-x-7">
-                <li><a class="hover:text-blue-600" href="#">Home</a></li>
+                <li><a class="hover:text-blue-600" href="{% url 'fish_card' %}">Home</a></li>
                 <li><a class="hover:text-blue-600" href="{% url 'fish_list' %}">จัดการข้อมูลปลา</a></li>
                 <li><a class="hover:text-blue-600" href="#">Dashboard</a></li>
                
