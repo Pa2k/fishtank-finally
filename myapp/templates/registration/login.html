@@ -8,12 +8,42 @@
         <button type="submit">Login</button>
         <a href="{% url 'password_reset' %}">Lost Password?</a>
     </form> -->
+
+    <style>
+        body {
+            text-align: center; 
+            margin: 0; 
+            font-family: Arial, sans-serif; 
+        }
+
+        .navbar {
+            background-color: #3a659e; 
+            padding: 10px; 
+            position: relative; 
+            width: 100%; 
+        }
+
+        .navbar a {
+            color: white; 
+            text-decoration: none; 
+            margin: 0 15px; 
+        }
+</style>
+
+    <div class="flex flex-col justify-center min-h-screen" style="background: #bcdffd;">
+
+        <div class="navbar">
+        <img src="path/to/login.png" alt="Logo"> 
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+    </div>
+
     <div class="flex flex-col justify-center min-h-screen" style="background: linear-gradient(to right, #59758d, #96b2d3, #95c6da, #abd0df);;">
         
-        <!-- ว่าจะใส่รูป แต่มันไม่ขึ้น -->
-        <!-- <div class="w-1/4 flex items-center justify-center">
+        <div class="w-1/4 flex items-center justify-center">
             <img src="{% static 'images/login.jpg' %}" alt="Login Image" class="w-3/4 h-auto">
-        </div> -->
+        </div> 
         
         <div class="mx-auto w-1/4 my-8">
             <!-- login_box -->
@@ -67,4 +97,7 @@
             </div>
         </div>
     </div>
+
+
+    
 {% endblock %}
