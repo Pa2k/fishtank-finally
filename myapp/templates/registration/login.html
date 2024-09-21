@@ -1,15 +1,24 @@
 {% extends 'main/base.html' %}
 
 {% block main %}
+{% load static %}
     <!-- <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         {{form.as_p}}
         <button type="submit">Login</button>
         <a href="{% url 'password_reset' %}">Lost Password?</a>
     </form> -->
-    <div class="flex flex-col justify-center min-h-screen bg-gray-500">
+    <div class="flex flex-col justify-center min-h-screen" style="background: linear-gradient(to right, #59758d, #96b2d3, #95c6da, #abd0df);;">
+        
+        <!-- ว่าจะใส่รูป แต่มันไม่ขึ้น -->
+        <!-- <div class="w-1/4 flex items-center justify-center">
+            <img src="{% static 'images/login.jpg' %}" alt="Login Image" class="w-3/4 h-auto">
+        </div> -->
+        
         <div class="mx-auto w-1/4 my-8">
-            <div class="bg-white p-8 shadow-lg rounded-lg">
+            <!-- login_box -->
+            <!-- <div class="bg-white p-8 shadow-lg rounded-lg"> -->
+            <div class="bg-white p-8 shadow-lg rounded-lg" style="background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);">
                     <div class="flex justify-center mb-8" >
                         <p class="text-2xl font-bold">Login</p>
                     </div>
@@ -43,12 +52,18 @@
                                 </svg>
                                 <input type="password" placeholder="Password"  name="password" class="grow" />
                             </label>
+                            <a href="{% url 'password_reset' %}" style="font-size: 12px; color: #868686; text-align: right; display: block;">Forget Password?</a>
                             
                             <div class="flex justify-center my-4">
-                                <button class="btn btn-outline btn-neutral w-1/2" type="submit" >Login</button>
+                                <button class="btn w-1/2" style="background-color: #214770; color: white; padding: 10px 20px; border-radius: 8px;" type="submit">Login</button>
+                            </div>                                                       
+
+                            <div style="text-align: center;">
+                                <span style="font-size: 12px; color: #000000;">Don't have an account?</span>
+                                <a href="{% url 'register' %}" style="font-size: 12px; color: #000000; font-weight: bold;">Register</a>
                             </div>
-                            <a href="{% url 'password_reset' %}">Lost Password?</a>
-                    </form>
+                                                        
+                        </form>
             </div>
         </div>
     </div>
