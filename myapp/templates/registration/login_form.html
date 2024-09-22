@@ -2,12 +2,7 @@
 
 {% block main %}
 {% load static %}
-    <!-- <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Login</button>
-        <a href="{% url 'password_reset' %}">Lost Password?</a>
-    </form> -->
+
     <div class="flex flex-col justify-center min-h-screen" style="background: linear-gradient(to right, #59758d, #96b2d3, #95c6da, #abd0df);;">
         
         <!-- ว่าจะใส่รูป แต่มันไม่ขึ้น -->
@@ -22,7 +17,7 @@
                     <div class="flex justify-center mb-8" >
                         <p class="text-2xl font-bold">Login</p>
                     </div>
-                    <form method="post" action="{% url 'login' %}" class="space-y-5" >
+                    <form method="post" action="{% url 'user-login' %}" class="space-y-5" >
                         {% csrf_token %}
                             <label class="input input-bordered flex items-center gap-2">
                             <svg
@@ -52,7 +47,7 @@
                                 </svg>
                                 <input type="password" placeholder="Password"  name="password" class="grow" />
                             </label>
-                            <!-- <a href="{% url 'password_reset' %}" style="font-size: 12px; color: #868686; text-align: right; display: block;">Forget Password?</a> -->
+                          
                             
                             <div class="flex justify-center my-4">
                                 <button class="btn w-1/2" style="background-color: #214770; color: white; padding: 10px 20px; border-radius: 8px;" type="submit">Login</button>

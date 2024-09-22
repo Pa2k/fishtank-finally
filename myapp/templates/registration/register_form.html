@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+{% block main %}
+    <!-- <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Register</button>
+        <a href="{% url 'user-login' %}">Already have an account?</a>
+    </form> -->
+    <div class="flex flex-col justify-center min-h-screen bg-gray-500">
+        <div class="mx-auto w-1/3 my-8">
+            <div class="bg-white p-8 shadow-lg rounded-lg">
+                <div class="flex justify-center mb-5 space-x-3">
+                    <p class="text-2xl font-bold">Register</p>
+                </div>
+            
+                <form  method="post" action="{% url 'register' %}" class="flex justify-center space-y-3">
+                    {% csrf_token %}
+                        <label class="form-control w-full max-w-xs ">
+                            <div class="label">
+                                <span class="label-text ">Username</span>
+                            </div>
+                            <input type="text" id="username" name="username" placeholder="username"  class="input input-bordered input-neutral w-full max-w-xs rounded-full mb-2" />
+                            
+                            <div class="label">
+                                <span class="label-text ">Email</span>
+                            </div>
+                            <input type="email" id="email" name="email" placeholder="email"  class="input input-bordered input-neutral w-full max-w-xs rounded-full mb-2" />
+                            
+                            <div class="label">
+                                <span class="label-text ">Password</span>
+                            </div>
+                            <input type="password" id="password1" name="password1" placeholder="password"  class="input input-bordered input-neutral w-full max-w-xs rounded-full mb-2" />
+                            
+                            <div class="label">
+                                <span class="label-text ">Confirm password</span>
+                            </div>
+                            <input type="password" id="password2" name="password2" placeholder="confirm password"  onChange={handleChange} class="input input-bordered input-neutral w-full max-w-xs rounded-full mb-2" />
+                            
+                            <div class="flex justify-center my-4  ">
+                                <button type="submit"  class="btn btn-outline btn-neutral w-1/2">Register</button>
+                            </div>
+                            <a href="{% url 'user-login' %}">Already have an account?</a>
+                        </label>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

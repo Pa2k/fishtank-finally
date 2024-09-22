@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
-    'fishkeeper',
+
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -61,7 +61,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "fishtank.urls"
-
+LOGIN_URL = 'user-login'
+LOGIN_REDIRECT_URL = "fish-home"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

@@ -1,15 +1,6 @@
 {% extends "main/base.html" %}
 
 {% block main %}
-{% if user.is_authenticated %}
-    
-    <form action="{% url 'logout' %}" method="post">
-        <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-        {% csrf_token %}
-        <button type="submit">logout</button>
-
-    </form>
-{% else %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +71,7 @@
 
     <div class="navbar">
         <img src="path/to/login.png" alt="Logo"> 
-        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'user-login' %}">Login</a>
         <a href="{% url 'register' %}">Register</a>
         <a href="#">Home</a>
     </div>
@@ -89,7 +80,7 @@
     <p class="subtext">let's try</p>
 
     <p>
-        <a href="{% url 'login' %}" class="button login">Login</a>
+        <a href="{% url 'user-login' %}" class="button login">Login</a>
         <a href="{% url 'register' %}" class="button register">Register</a>
     </p>
 
@@ -98,5 +89,5 @@
 
 
     
-{% endif %}
+
 {% endblock %}
