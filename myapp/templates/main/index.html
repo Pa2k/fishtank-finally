@@ -1,20 +1,10 @@
 {% extends "main/base.html" %}
 
 {% block main %}
-<<<<<<< HEAD
-=======
-{% if user.is_authenticated %}
-    
-    <form action="{% url 'logout' %}" method="post">
-        <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-        {% csrf_token %}
-        <button type="submit">logout</button>
 
-    </form>
-{% else %}
 {% load static %}
 
->>>>>>> edf9cbb1d8d843422ac33c400c3a77ea6a0fa33f
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -114,16 +104,12 @@
     </style>
 </head>
 
-<<<<<<< HEAD
     <div class="navbar">
         <img src="path/to/login.png" alt="Logo"> 
         <a href="{% url 'user-login' %}">Login</a>
         <a href="{% url 'register' %}">Register</a>
         <a href="#">Home</a>
     </div>
-=======
-<body> 
->>>>>>> edf9cbb1d8d843422ac33c400c3a77ea6a0fa33f
 
     <p class="welcome">Welcome to</p>
     <p class="Fishtank">FISHTANK</p>
@@ -134,13 +120,8 @@
     </div>    
 
     <p>
-<<<<<<< HEAD
         <a href="{% url 'user-login' %}" class="button login">Login</a>
         <a href="{% url 'register' %}" class="button register">Register</a>
-=======
-        <a href="{% url 'login' %}" class="button login">LOGIN</a>
-        <a href="{% url 'register' %}" class="button register">REGISTER</a>
->>>>>>> edf9cbb1d8d843422ac33c400c3a77ea6a0fa33f
     </p>
 
     

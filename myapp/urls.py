@@ -2,6 +2,7 @@ from django.urls import path,include
 from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import PasswordResetView,PasswordResetDoneView,PasswordResetConfirmView,PasswordResetCompleteView
 urlpatterns = [
     path("",index,name="index"),
     path("fish/home/",home,name="fish-home"),
@@ -11,10 +12,15 @@ urlpatterns = [
     path('user/login/', UserLoginView.as_view(), name='user-login'),
     path('user/logout/', UserLogoutView.as_view(), name='user-logout'),
     path("user/register/",registration_view,name="register"),
+    path('password_reset/',PasswordResetView.as_view(template_name="registration/password_reset_form.html"),name="password_reset"),
+    path('password_reset/done/',PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"),name="password_reset_done"),
+    path('reset/<uidb64>/<token>/',PasswordResetConfirmView.as_view(template_name="registration/password_reset_confirm.html"),name="password_reset_confirm"),
+    path('reset/done/',PasswordResetCompleteView.as_view(template_name="registration/password_reset_complete.html"),name="password_reset_complete"),
+
 
     path("fishkeeper/", staff_home, name="staff-home"),
 
-    path('fishkeeper/fishlist',fish_list,name='fish_list'),
+    path('fishkeeper/fishlist/',fish_list,name='fish_list'),
     path('fishkeeper/detail/<int:fish_id>/', fish_detail, name='fish_detail'),
     path("fishkeeper/card/",fish_card,name="fish_card"),  
     path('fishkeeper/card_detail/<int:fish_id>/', fish_card_detail, name='fish_card_detail'),
